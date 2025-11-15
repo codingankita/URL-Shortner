@@ -1,5 +1,6 @@
 const {nanoid} = require('nanoid');
 const Url = require('../models/Url');
+
 async function handleShortURL(req, res) {    
     try {
         if(req.body.longUrl == undefined){
@@ -19,4 +20,18 @@ async function handleShortURL(req, res) {
     }
 };
 
-module.exports = { handleShortURL };
+async function handleRedirect(req, res) {
+    try{
+        const shortId = req.params.shortId;
+        const entry = await Url.findOneAndUpdate({ shortUrl: shortId }, { $inc: { clicks: 1 } });
+        res.redirect(entry.originalUrl);
+    }catch(err){
+        console.error("❌ Error:", err);   
+    } 
+};
+
+// app.get('/:shortId', async (req, res) => {
+        
+//   });
+
+module.exports = { handleShortURL ,handleRedirect };
