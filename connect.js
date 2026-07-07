@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
+// Connect to MongoDB
 async function connectDB() {
-    mongoose.connect('mongodb+srv://ankita000bhatt_db_user:r71Og2rwKTenKWWL@url-shortner.6myld4p.mongodb.net/?appName=URL-shortner')
+    await mongoose.connect(process.env.MONGO_URI);
 }
 
 module.exports = {

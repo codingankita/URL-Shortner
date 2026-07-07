@@ -1,12 +1,12 @@
 require("dotenv").config();
-const {connectDB}  = require('./connect');
-const { connectRedis } = require('./config/redis');
-const express = require('express');
-const Url = require('./models/url');
-const urlRoutes = require('./routes/url');
+import { connectDB } from './connect';
+import { connectRedis } from './config/redis';
+import express, { json } from 'express';
+import Url from './models/url';
+import urlRoutes from './routes/url';
 
 const app = express();
-app.use(express.json());
+app.use(json());
 
 connectDB().then(() => {
     console.log('✅ MongoDB Connected');
