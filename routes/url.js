@@ -1,7 +1,10 @@
 const express = require('express');
-const { handleShortURL , handleRedirect} = require('../controllers/urlController');
+const { handleShortURL , handleRedirect , handleHealthCheck , handleCustomShortURL} = require('../controllers/urlController');
 const router = express.Router();
 console.log("Inside URL routes");
 router.post('/', handleShortURL);
 router.get('/:shortId', handleRedirect);
+router.get('/health', handleHealthCheck);
+router.post('/custom', handleCustomShortURL);
+router.put('/:shortId', handleUpdateURL);
 module.exports = router;
